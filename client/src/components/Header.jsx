@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
 
 const Header = () => {
   return (
-    <div>Header</div>
-  )
-}
+    <header className="bg-slate-200 shadow-md">
+      <div className="flex justify-between">
+        <h1 className="font-bold text-sm:text-xl flex flex-wrap">
+          <span className="text-slate-500">Urban</span>
+          <span className="text-slate-700">Nest</span>
+        </h1>
 
-export default Header
+        <form>
+          <input type="text" placeholder="Search..." />
+        </form>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
