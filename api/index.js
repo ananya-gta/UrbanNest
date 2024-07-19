@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
 dotenv.config();
 
 mongoose
@@ -14,6 +15,9 @@ mongoose
   });
 
 const app = express();
+
+app.use(express.json());
+
 const port = 3000;
 
 //start the server
@@ -27,3 +31,6 @@ app.listen(port, () => {
 // => we can send anything json also, but this is not a good practice, create folder for routes and use them in index.js
 // When you use export default in a module, you are specifying the default export for that module. This allows you to import the module in another file using any name you choose.
 app.use("/api/user", userRouter);
+
+//sign-up api route
+app.use("/api/auth", authRouter);
