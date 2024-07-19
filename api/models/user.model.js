@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// timestamps will tel the time of creation and updation of user
+// timestamps will tell the time of creation and updation of user
 
 const User = mongoose.model('User', userSChema);
 
