@@ -20,17 +20,18 @@ export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const validUser = await User.findOne({ email: email });
-    if (!validUser) return errorHandler(404, "User not found!");
+    if (!validUser) return next(errorHandler(404, "User not found!"));
 
     const isPasswordValid = bcryptjs.compareSync(password, validUser.password);
     if (!isPasswordValid)
-      return errorHandler(
+      return next(errorHandler(
         401,
         "You have entered an invalid username or password."
-      );
+      ));
 
     // its not a good practice to show pw also so we will remove pw and add the rest in cookie
-    // to see what _doc is try to send nly validUser
+    // to see what _doc is try to send only validUser
+    // if you are wondering where you can see the information, then inspect -> network -> signin you will see there
     const {password: pw, ...restUserInfo} = validUser._doc;
 
     // to authenticate the user we will add cookie into the browser,
