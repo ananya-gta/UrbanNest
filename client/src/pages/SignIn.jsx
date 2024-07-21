@@ -3,13 +3,14 @@ import { FcGoogle } from "react-icons/fc";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signInStart, signInFailure, signInSuccess } from "../redux/user/userSlice";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const {loading, error} = useSelector((state) => state.user)
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,7 +22,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -33,17 +34,14 @@ const SignIn = () => {
       console.log(data);
 
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        dispatch(signInFailure(data.message))
         return;
       }
       // since loading is completed
-      setLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data))
       navigate("/");
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      dispatch(signInFailure(error.message))
     }
   };
 
@@ -52,7 +50,9 @@ const SignIn = () => {
       <div className="text-center w-full font-bold text-3xl text-gray-600 mb-3 mt-7">
         LOGIN
       </div>
-      <p className="text-center text-sm mb-6 text-[#0c2856]">Sign in to your account</p>
+      <p className="text-center text-sm mb-6 text-[#0c2856]">
+        Sign in to your account
+      </p>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
