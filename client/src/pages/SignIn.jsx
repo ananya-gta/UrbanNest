@@ -1,14 +1,18 @@
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInStart, signInFailure, signInSuccess } from "../redux/user/userSlice";
+import {
+  signInStart,
+  signInFailure,
+  signInSuccess,
+} from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const {loading, error} = useSelector((state) => state.user)
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -34,14 +38,14 @@ const SignIn = () => {
       console.log(data);
 
       if (data.success === false) {
-        dispatch(signInFailure(data.message))
+        dispatch(signInFailure(data.message));
         return;
       }
       // since loading is completed
-      dispatch(signInSuccess(data))
+      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error.message))
+      dispatch(signInFailure(error.message));
     }
   };
 
@@ -81,16 +85,13 @@ const SignIn = () => {
           </span>
         </button>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4  mt-3">
           <hr className="w-full border border-gray-300" />
           <div className="font-semibold text-gray-400">OR</div>
           <hr className="w-full border border-gray-300" />
         </div>
 
-        <button className="bg-[#2c081011] border p-3 w-full rounded-lg mt-5 flex justify-center items-center  hover:opacity-90">
-          <FcGoogle className="w-6 h-6" />
-          <span className="ml-4 font-semibold">Continue with Google</span>
-        </button>
+        <OAuth />
 
         <p className="text-sm mt-6 text-center text-gray-800">
           Do not have an account?

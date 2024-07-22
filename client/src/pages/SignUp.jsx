@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
@@ -88,16 +89,13 @@ const SignUp = () => {
           </span>
         </button>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 mt-3">
           <hr className="w-full border border-gray-300" />
           <div className="font-semibold text-gray-400">OR</div>
           <hr className="w-full border border-gray-300" />
         </div>
 
-        <button className="bg-[#2c081011] border p-3 w-full rounded-lg mt-5 flex justify-center items-center  hover:opacity-90">
-          <FcGoogle className="w-6 h-6" />
-          <span className="ml-4 font-semibold">Continue with Google</span>
-        </button>
+        <OAuth />
 
         <p className="text-sm mt-6 text-center text-gray-800">
           Already have an account?
