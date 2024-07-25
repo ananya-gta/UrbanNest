@@ -94,20 +94,20 @@ const SignUp = () => {
           <div className="font-semibold text-gray-400">OR</div>
           <hr className="w-full border border-gray-300" />
         </div>
-
-        <OAuth />
-
-        <p className="text-sm mt-6 text-center text-gray-800">
-          Already have an account?
-          <Link to={"/sign-in"}>
-            <span className="text-blue-600 font-semibold hover:underline ml-1">
-              Login here
-            </span>
-          </Link>
-        </p>
-
-        {error && <p className="text-red-500 mt-5 text-center">{error}</p>}
       </form>
+
+      <OAuth />
+
+      <p className="text-sm mt-6 text-center text-gray-800">
+        Already have an account?
+        <Link to={"/sign-in"}>
+          <span className="text-blue-600 font-semibold hover:underline ml-1">
+            Login here
+          </span>
+        </Link>
+      </p>
+
+      {error && <p className="text-red-500 mt-5 text-center">{error}</p>}
     </div>
   );
 };

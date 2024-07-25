@@ -35,7 +35,7 @@ const OAuth = () => {
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      console.log("could not sign in with google", error);
+      console.log("Could not sign in with google", error);
     }
   };
 
@@ -43,7 +43,7 @@ const OAuth = () => {
     <button
       onClick={handleGoogleClick}
       type="button"
-      className="bg-[#2c081011] border p-3 w-full rounded-lg mt-2 flex justify-center items-center  hover:opacity-90"
+      className="bg-[#2c081011] border p-3 w-full rounded-lg mt-6 flex justify-center items-center  hover:opacity-90"
     >
       <FcGoogle className="w-6 h-6" />
       <span className="ml-4 font-semibold">Continue with Google</span>
