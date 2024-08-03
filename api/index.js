@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 mongoose
@@ -18,6 +19,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use(cookieParser());
+
 const port = 3000;
 
 //start the server
@@ -30,7 +33,8 @@ app.listen(port, () => {
 // => this will work for localhost:3000 but we want that whenever we hit localhost:5173, to interact with backend on ui then we need to create a proxy
 // => we can send anything json also, but this is not a good practice, create folder for routes and use them in index.js
 // When you use export default in a module, you are specifying the default export for that module. This allows you to import the module in another file using any name you choose.
-app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);import { verifyToken } from './utils/verifyUser';
+
 
 //sign-up api route
 app.use("/api/auth", authRouter);
